@@ -1,23 +1,21 @@
+# Demo-only Render Free deployment. All database and uploaded-image changes are temporary.
 services:
   - type: web
     name: shuka-marketplace
     runtime: node
-    plan: starter
-    buildCommand: npm install && npm run build
+    plan: free
+    buildCommand: npm ci --include=dev && npm run build
     startCommand: npm start
     healthCheckPath: /api/categories
-    disk:
-      name: shuka-persistent
-      mountPath: /var/data
-      sizeGB: 1
     envVars:
       - key: NODE_ENV
         value: production
       - key: DATA_DIR
-        value: /var/data
+        value: /tmp/shuka-data
       - key: COOKIE_SECRET
         generateValue: true
       - key: SEED_PASSWORD
         generateValue: true
       - key: NODE_VERSION
         value: 22.16.0
+# NO disk: Render Free doesn't support persistent disks.
