@@ -1,0 +1,23 @@
+services:
+  - type: web
+    name: shuka-marketplace
+    runtime: node
+    plan: starter
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    healthCheckPath: /api/categories
+    disk:
+      name: shuka-persistent
+      mountPath: /var/data
+      sizeGB: 1
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DATA_DIR
+        value: /var/data
+      - key: COOKIE_SECRET
+        generateValue: true
+      - key: SEED_PASSWORD
+        generateValue: true
+      - key: NODE_VERSION
+        value: 22.16.0

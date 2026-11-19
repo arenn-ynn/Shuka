@@ -1,0 +1,11 @@
+node_modules/
+frontend/dist/
+.env
+.env.*
+!.env.example
+data/
+*.sqlite*
+uploads/
+backups/
+.DS_Store
+coverage/
